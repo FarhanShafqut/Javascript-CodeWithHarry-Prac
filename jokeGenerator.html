@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+</head>
+<body  id="col" >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    <div class="conntainer">
+        <div class="row">
+            <div class="col-8 offset-2 mt-5 fs-1"  style="text-align: center;" >
+                <p id="jj" > <q> The joke will be here </q> </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        let joke =  [`What’s the best thing about Switzerland?
+                    I don’t know, but the flag is a big plus.`,
+                    `Why do we tell actors to “break a leg?”
+                    Because every play has a cast. Here are some dark jokes to check out if you have a morbid sense of humor.`,
+                    `What did one toilet say to the other?
+                    You look a bit flushed.`,
+
+                    `What do you think of that new diner on the moon?
+                    Food was good, but there really wasn’t much atmosphere.`,
+
+                    `Why did the dinosaur cross the road?
+                    Because the chicken wasn’t born yet`,
+
+                    `Why can’t Elsa from Frozen have a balloon?
+                    Because she will let it go, let it go`,
+
+                    `What musical instrument is found in the bathroom?
+                    A tuba toothpaste.`,
+
+                    `What did the farmer call the cow that had no milk?
+                    An udder failure.`,
+
+                    `What do you call a cow that won't give milk?
+                    A milk dud.`,
+
+                     `Why do fish live in salt water?
+                    Because pepper makes them sneeze.`,
+
+                        `What do you get from a pampered cow?
+                    Spoiled milk.`,
+
+                       ` Where do polar bears vote?
+                    The North Poll`
+,
+                       ` What sound do porcupines make when they kiss?
+                    Ouch!`,
+
+                    ` Why did the snake cross the road?
+                    To get to the other ssside.`,
+
+                     `Why are fish so smart?
+                    Because they live in schools.`,
+                    
+                    ]
+        let random = Math.floor(Math.random() * joke.length-1)
+        console.log(random)
+        joke = joke[random]
+        let change = document.getElementById("jj").innerHTML=joke
+        if ( random < 0  ){
+            change = document.getElementById("jj").innerHTML=`How do you fit more pigs on a farm?
+            Build a sty-scraper.`
+        }
+        
+        let colour= document.getElementById("col").style.backgroundColor = "rgb(220,220,220)"
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
