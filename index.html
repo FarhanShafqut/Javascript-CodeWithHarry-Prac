@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Night Sky Animation</title>
+	<style>
+		canvas {
+			background-color: black;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+	<script>
+        const canvas = document.querySelector('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        let stars = [];
+        
+        function Star() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.radius = Math.random() * 2;
+          this.color = 'white';
+          this.velocity = {
+            x: (Math.random() - 0.5) * 2,
+            y: (Math.random() - 0.5) * 2
+          }
+        }
+        
+        Star.prototype.draw = function() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        }
+        
+        Star.prototype.update = function() {
+          if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+            this.velocity.x = -this.velocity.x;
+          }
+          if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+            this.velocity.y = -this.velocity.y;
+          }
+          this.x += this.velocity.x;
+          this.y += this.velocity.y;
+        }
+        
+        Star.prototype.collide = function(other) {
+          const distance = Math.sqrt((this.x - other.x) ** 2 + (this.y - other.y) ** 2);
+          if (distance < this.radius + other.radius) {
+            this.velocity.x = -this.velocity.x;
+            this.velocity.y = -this.velocity.y;
+            other.velocity.x = -other.velocity.x;
+            other.velocity.y = -other.velocity.y;
+        
+            // increase the size of the stars on collision
+            this.radius += 0.1;
+            other.radius += 0.1;
+          }
+        }
+        
+        Star.prototype.handleHover = function(mouseX, mouseY) {
+          const distance = Math.sqrt((this.x - mouseX) ** 2 + (this.y - mouseY) ** 2);
+          if (distance < 50) {
+            this.velocity.x = (this.x - mouseX) * 0.05;
+            this.velocity.y = (this.y - mouseY) * 0.05;
+          }
+        }
+        
+        function createStars() {
+          for (let i = 0; i < 10; i++) {
+            stars.push(new Star());
+          }
+        }
+        
+        createStars();
+        
+        canvas.addEventListener('mousemove', function(event) {
+          const mouseX = event.clientX;
+          const mouseY = event.clientY;
+        
+          for (let i = 0; i < stars.length; i++) {
+            stars[i].handleHover(mouseX, mouseY);
+          }
+        });
+        
+        function animate() {
+          requestAnimationFrame(animate);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+          for (let i = 0; i < stars.length; i++) {
+            for (let j = i + 1; j < stars.length; j++) {
+              stars[i].collide(stars[j]);
+            }
+            stars[i].update();
+            stars[i].draw();
+          }
+        }
+        
+        animate();
+        
+        
+    </script>
+</body>
+</html>
