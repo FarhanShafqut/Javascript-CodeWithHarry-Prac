@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1 id="ss">here</h1>
+    </div>
+
+    <script>
+        function loadScript ( src ,callback ){
+           let script = document.createElement(`script`)
+            script.src = src
+            script.onload = function (){
+                console.log("it works",src)
+                callback(null , src)
+            }
+            script.onerror = function (){
+                console.log("Err")
+                callback (new Error ("EEEEEEEEEEEEEEEEEEEE" , src))
+            }
+            document.body.appendChild(script)
+        }
+        function hello (error,src){
+            if (error){
+                console.log("DONT WORK")
+                return
+            }
+            else {
+                alert('Good morning' + src);
+        }
+        }
+        loadScript("https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js",hello)
+    </script>
+</body>
+</html>
